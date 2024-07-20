@@ -1,12 +1,32 @@
 from django.shortcuts import render
-from .models import AboutMe, Skill, Project, Experience
+from .models import AboutMe, Skill, Project, Experience,Contact
 from .forms import ContactForm
+from django.shortcuts import redirect
 
 def home(request):
     about_me = AboutMe.objects.first()
     skills = Skill.objects.all()
-    projects = Project.objects.all()
+    projects_model_obj = Project.objects.all()
+    projects=[]
+    for project in projects_model_obj:
+        skill_arr=""
+        for skill in project.skills.all():
+            skill_arr+=skill.name+", "
+        project_obj = {
+            'title': project.title,
+            'description': project.description,
+            'image': project.image,
+            'link': project.link,
+            'skills': skill_arr[:-2]
+        }
+        projects.append(project_obj)
+
     experiences = Experience.objects.all()
+    for experience in experiences:
+        if experience.end_date is None:
+            experience.end_date = 'Present'
+        if experience.description:
+            experience.description = experience.description.split('#')
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -21,23 +41,18 @@ def home(request):
         'form': form
     })
 
-def about_view(request):
-    # Your logic here
-    return render(request, 'about.html', {})
+from django.views.decorators.csrf import csrf_exempt
 
-def contact_view(request):
-    # Your logic here
-    return render(request, 'contact.html', {})
 
-def projects_view(request):
-    # Your logic here
-    return render(request, 'projects.html', {})
-
-def experiences_view(request):
-    # Your logic here
-    return render(request, 'experiences.html', {})
-
-def skills_view(request):
-    # Your logic here
-    return render(request, 'skills.html', {})
+def contact_submit(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+        
+        Contact.objects.create(name=name, email=email, phone=phone, message=message)
+        
+        return redirect('/#contact') # Redirect to a new URL for success message or back to form
+    return render(request, 'index.html') 
 

@@ -1,11 +1,13 @@
 from django.contrib import admin
 from .models import AboutMe, Skill, Project, Experience, Contact
 
-
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('title', 'description')  # Customize as needed
+    filter_horizontal = ('skills',)  # This makes selecting skills easier
 
 admin.site.register(AboutMe)
 admin.site.register(Skill)
-admin.site.register(Project)
+admin.site.register(Project, ProjectAdmin)
 admin.site.register(Experience)
 admin.site.register(Contact)
 

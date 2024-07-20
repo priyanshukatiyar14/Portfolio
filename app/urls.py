@@ -1,12 +1,12 @@
 from django.urls import path
 from .views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', home, name='home'),
-    path('about/', about_view, name='about'),
-    path('contact/', contact_view, name='contact'),
-    path('projects/', projects_view, name='projects'),
-    path('experiences/', experiences_view, name='experiences'),
-    path('skills/', skills_view, name='skills'),
-    
-]
+    path('contact_submit/', contact_submit, name='contact_submit') 
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  
+
+# static files url
+
