@@ -1,0 +1,115 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Priyanshu Katiyar</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="#home" style="font-weight: bold">Priyanshu Katiyar</a>
+      <div class="menu-items">
+        <a href="#aboutme">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="menu-icon">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+    <div id="particles-js"></div>
+    <div id="intro">
+      <h1>Hi There, I'm Priyanshu Katiyar</h1>
+      <p>I Am Into <span class="typing">Python-Java Development</span></p>
+      <div class="social-icons">
+        <a
+          href="https://www.linkedin.com/in/priyanshukatiyar/"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a
+          href="https://github.com/priyanshukatiyar14"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="fab fa-github"></i
+        ></a>
+        <a
+          href="https://www.instagram.com/_priyanshu_katiyar_/"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a
+          href="mailto:priyanshukatiyar111@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          ><i class="fas fa-envelope"></i
+        ></a>
+      </div>
+      <a href="#aboutme" class="button"
+        >About Me <img src="{% static 'images/down.png' %}" alt="arrow-down"
+      /></a>
+    </div>
+    <section id="aboutme">
+      <div class="profile-pic">
+        <img src="{% static 'images/bitmoji.jpg' %}" alt="Profile Picture" />
+      </div>
+      <div class="about-info">
+        <h1>I'm Priyanshu Katiyar</h1>
+        <h2>{{about_me.intro}}</h2>
+        <p>{{about_me.description}}</p>
+        <span class="user-info">
+          <span class="info">
+            <div class="chip">
+              <strong>Age: </strong>
+              {{about_me.age}}
+            </div>
+            <div class="chip">
+              <strong>Email: </strong>
+              {{about_me.email}}
+            </div>
+          </span>
+          <span class="info">
+            <div class="chip">
+              <strong>Phone: </strong>
+              {{about_me.phone}}
+            </div>
+            <div class="chip">
+              <strong>Place: </strong>
+              {{about_me.address}}
+            </div>
+          </span>
+        </span>
+        <a
+          href="{{about_me.resume_link}}"
+          class="resume-button"
+          target="arrow-right"
+          >Resume
+          <img src="{% static 'images/to-right.png' %}" alt="arrow-down"
+        /></a>
+      </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      particlesJS.load(
+        "particles-js",
+        '{% static "particles.json" %}',
+        function () {
+          console.log("particles.js loaded - callback");
+        }
+      );
+    </script>
+    <script src="{% static 'js/scrolling.js' %}"></script>
+    <script src="{% static 'js/typing.js' %}"></script>
+  </body>
+</html>
